@@ -1,14 +1,24 @@
 class CoreController < ApplicationController
-  def create
-  end
-
   def index
-    # env['coap.multicast']
+    query = params.except(:controller, :action)
 
-    if ['core.rd', 'core.rd*'].include?(params[:rt])
-      render link: '</rd>;rt=core.rd' and return
+    if query.empty?
+      @links = TypedLink.all
+    elsif query[:rt] == 'core.rd*'
+      @links = TypedLink
+        .joins(:target_attributes)
+        .where(target_attributes: {type: 'rt'})
+        .where('target_attributes.value like ?', 'core.rd%')
+    else
+      @links = TypedLink
+        .joins(:target_attributes)
+        .where(target_attributes: {type: query.keys, value: query.values})
     end
 
-    render link: ''
+    if @links.empty?
+      head :not_found
+    else
+      render text: @links.to_link
+    end
   end
 end
