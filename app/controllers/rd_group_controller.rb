@@ -1,7 +1,14 @@
 class RdGroupController < ApplicationController
-  discovery \
-    index:  { rt: 'coap.rd-group' }
+  def create
+    render json: create_params
+  end
 
-  def index
+  def destroy
+  end
+
+  private
+
+  def create_params
+    params.permit(:gp, :d, :con)
   end
 end

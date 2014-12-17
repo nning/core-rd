@@ -3,12 +3,15 @@ Rails.application.routes.draw do
 
   scope '/.well-known' do
     get '/core', to: 'core#index'
-    post '/core', to: 'core#create'
   end
 
-  get '/rd',        to: 'rd#index'
+  post   '/rd',     to: 'rd#create'
+  get    '/rd/:id', to: 'rd#show'
+  post   '/rd/:id', to: 'rd#update'
+  delete '/rd/:id', to: 'rd#destroy'
 
-  get '/rd-group',  to: 'rd_group#index'
+  post   '/rd-group',     to: 'rd_group#create'
+  delete '/rd-group/:id', to: 'rd_group#destroy'
 
-  get '/rd-lookup', to: 'rd_lookup#index'
+  get '/rd-lookup/:type', to: 'rd_lookup#lookup', as: 'rd_lookup'
 end

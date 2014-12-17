@@ -1,7 +1,11 @@
 class RdLookupController < ApplicationController
-  discovery \
-    index: { rt: 'coap.rd-lookup' }
+  def lookup
+    render json: lookup_params
+  end
 
-  def index
+  private
+
+  def lookup_params
+    params.permit(:d, :ep, :gp, :et, :rt, :page, :count, :'resource-param')
   end
 end
