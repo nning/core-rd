@@ -1,5 +1,5 @@
 class TypedLink < ActiveRecord::Base
-  has_many :target_attributes
+  has_many :target_attributes, dependent: :destroy
 
   # Instance to CoRE::Link
   def to_link
@@ -22,6 +22,7 @@ class TypedLink < ActiveRecord::Base
         .where('target_attributes.value like ?', 'core.rd%')
     else
       TypedLink
+        .uniq
         .joins(:target_attributes)
         .where(target_attributes: {type: query.keys, value: query.values})
     end

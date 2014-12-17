@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :typed_link do
-    path '/test'
+    sequence(:path) { |n| "/test#{n}" }
   end
 end
