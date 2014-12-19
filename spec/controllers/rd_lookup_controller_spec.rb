@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-describe RdLookupController, type: :controller do
+describe RdLookupController do
   pending
 end

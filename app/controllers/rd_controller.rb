@@ -8,21 +8,34 @@ class RdController < ApplicationController
       head :bad_request and return
     end
 
-    if links.empty?
-      head :bad_request and return
-    else
-      render text: links.map(&:to_s).join(',')
+    head :bad_request and return if links.empty?
+
+    r = ResourceRegistration.new(create_params)
+
+    links.each do |link|
+      l = r.typed_links.build(path: link.uri)
+      link.attrs.each do |type, value|
+        l.target_attributes.build(type: type, value: value)
+      end
     end
+
+    r.save!
+
+    # TODO Use path helper
+    response.headers['Location'] = "/rd/#{r.id}"
+
+    head :created
   end
 
   def destroy
-  end
+    r = ResourceRegistration.find(params[:id])
+    r.destroy!
 
-  def show
+    head :accepted
   end
 
   def update
-    render json: update_params
+    head :service_unavailable
   end
 
   private

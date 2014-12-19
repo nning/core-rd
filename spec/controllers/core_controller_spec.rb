@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe CoreController, type: :controller do
+describe CoreController do
   describe 'GET #index' do
     context 'empty' do
       it '404' do
@@ -26,6 +26,12 @@ describe CoreController, type: :controller do
         expect(response).to have_http_status(200)
       end
 
+      it 'assignes' do
+        expect(assigns(:links)).to be_a(ActiveRecord::Relation)
+        expect(assigns(:links)).not_to be_empty
+        expect(assigns(:links).size).to eq(5)
+      end
+
       it 'parsed' do
         links = CoRE::Link.parse_multiple(response.body)
 
@@ -40,15 +46,18 @@ describe CoreController, type: :controller do
 
     context 'filtered' do
       context 'one attribute' do
-        before do
-          a = create(:target_attribute)
-          b = create(:target_attribute, type: 'rt', value: 'a')
+        let!(:a) { create(:target_attribute) }
+        let!(:b) { create(:target_attribute, type: 'rt', value: 'a') }
 
-          get :index, rt: 'a'
-        end
+        before  { get :index, rt: 'a' }
 
         it '200' do
           expect(response).to have_http_status(200)
+        end
+
+        it 'assignes' do
+          expect(assigns(:links)).to be_a(ActiveRecord::Relation)
+          expect(assigns(:links)).to eq([b.typed_link])
         end
 
         it 'body' do
@@ -66,17 +75,20 @@ describe CoreController, type: :controller do
       end
 
       context 'two attributes' do
-        before do
-          a = create(:target_attribute, type: 'rt', value: 'a')
-          b = create(:target_attribute, type: 'rt', value: 'b')
-          c = create(:target_attribute, type: 'if', value: 'c',
-            typed_link: b.typed_link)
+        let!(:a) { create(:target_attribute, type: 'rt', value: 'a') }
+        let!(:b) { create(:target_attribute, type: 'rt', value: 'b') }
+        let!(:c) { create(:target_attribute, type: 'if', value: 'c',
+                     typed_link: b.typed_link) }
 
-          get :index, rt: 'b', if: 'c'
-        end
+        before { get :index, rt: 'b', if: 'c' }
 
         it '200' do
           expect(response).to have_http_status(200)
+        end
+
+        it 'assignes' do
+          expect(assigns(:links)).to be_a(ActiveRecord::Relation)
+          expect(assigns(:links)).to eq([b.typed_link])
         end
 
         it 'body' do
@@ -95,16 +107,19 @@ describe CoreController, type: :controller do
       end
 
       context 'wildcard' do
-        before do
-          a = create(:target_attribute, type: 'rt', value: 'core.rd')
-          b = create(:target_attribute, type: 'rt', value: 'core.rd-group')
-          c = create(:target_attribute, type: 'rt', value: 'core.rd-lookup')
+        let!(:a) { create(:target_attribute, type: 'rt', value: 'core.rd') }
+        let!(:b) { create(:target_attribute, type: 'rt', value: 'core.rd-group') }
+        let!(:c) { create(:target_attribute, type: 'rt', value: 'core.rd-lookup') }
 
-          get :index, rt: 'core.rd*'
-        end
+        before { get :index, rt: 'core.rd*' }
 
         it '200' do
           expect(response).to have_http_status(200)
+        end
+
+        it 'assignes' do
+          expect(assigns(:links)).to be_a(ActiveRecord::Relation)
+          expect(assigns(:links)).to eq([a, b, c].map(&:typed_link))
         end
 
         it 'parsed' do

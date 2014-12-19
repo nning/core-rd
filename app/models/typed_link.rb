@@ -1,5 +1,6 @@
 class TypedLink < ActiveRecord::Base
-  has_many :target_attributes, dependent: :destroy
+  belongs_to  :resource_registration
+  has_many    :target_attributes, dependent: :destroy
 
   # Instance to CoRE::Link
   def to_link

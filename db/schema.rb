@@ -11,12 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141216112658) do
+ActiveRecord::Schema.define(version: 20141219095442) do
+
+  create_table "resource_registrations", force: true do |t|
+    t.string   "ep",                         null: false
+    t.string   "d"
+    t.string   "et"
+    t.integer  "lt",         default: 86400
+    t.string   "con"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "resource_registrations", ["ep"], name: "index_resource_registrations_on_ep", unique: true
 
   create_table "target_attributes", force: true do |t|
-    t.string   "type"
-    t.string   "value"
-    t.integer  "typed_link_id"
+    t.integer  "typed_link_id", null: false
+    t.string   "type",          null: false
+    t.string   "value",         null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -24,9 +36,12 @@ ActiveRecord::Schema.define(version: 20141216112658) do
   add_index "target_attributes", ["typed_link_id"], name: "index_target_attributes_on_typed_link_id"
 
   create_table "typed_links", force: true do |t|
-    t.string   "path"
+    t.string   "path",                     null: false
+    t.integer  "resource_registration_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "typed_links", ["resource_registration_id"], name: "index_typed_links_on_resource_registration_id"
 
 end

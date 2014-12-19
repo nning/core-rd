@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-describe RdGroupController do
+describe ResourceRegistration do
   pending
 end

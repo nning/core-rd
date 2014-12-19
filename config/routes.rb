@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   end
 
   post   '/rd',     to: 'rd#create'
-  get    '/rd/:id', to: 'rd#show'
   post   '/rd/:id', to: 'rd#update'
   delete '/rd/:id', to: 'rd#destroy'
 
