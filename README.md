@@ -1,4 +1,4 @@
-# coap-rd
+# core-rd
 
 Rails application implementing a [CoRE Resource Directory](https://tools.ietf.org/html/draft-ietf-core-resource-directory-01).
 
