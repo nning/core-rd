@@ -10,6 +10,10 @@ class RdController < ApplicationController
 
     head :bad_request and return if links.empty?
 
+    if params[:con].nil?
+      params[:con] = ResourceRegistration.default_con(request)
+    end
+
     r = ResourceRegistration.new(create_params)
 
     links.each do |link|
@@ -35,6 +39,10 @@ class RdController < ApplicationController
   end
 
   def update
+    rr = ResourceRegistration.find(params[:id])
+
+    head 204 and return if rr.update!(update_params)
+
     head :service_unavailable
   end
 

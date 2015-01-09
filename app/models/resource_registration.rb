@@ -14,6 +14,18 @@ class ResourceRegistration < ActiveRecord::Base
 
   validate :bytesizes
 
+  def self.default_con(request)
+    dtls = request.env['coap.dtls']
+
+    scheme = 'coap'
+    scheme = 'coaps' if !dtls.nil? && dtls != 'NoSec'
+
+    ip = request.ip
+    ip = "[#{ip}]" if IPAddr.new(ip).ipv6?
+
+    "#{scheme}://#{ip}"
+  end
+
   private
 
   def bytesizes
