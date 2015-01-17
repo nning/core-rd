@@ -77,6 +77,50 @@ describe RdController do
         it { expect(response.status).to eq(204) }
         it { expect(rr.con).to eq(con) }
       end
+
+      context 'body' do
+        context 'valid change' do
+          before { post_body :update, '</test1>;if="test1"', id: @id }
+
+          it { expect(response.status).to eq(204) }
+          it { expect(rr.typed_links.size).to eq(2) }
+
+          it do
+            link = rr.typed_links.where(path: '/test1').first
+            attr = link.target_attributes.where(type: 'if').first
+
+            expect(attr.value).to eq('test1')
+          end
+        end
+
+        context 'valid create' do
+          before { post_body :update, '</test3>;if="test3"', id: @id }
+
+          it { expect(response.status).to eq(204) }
+          it { expect(rr.typed_links.size).to eq(3) }
+
+          it do
+            link = rr.typed_links.where(path: '/test3').first
+            attr = link.target_attributes.where(type: 'if').first
+
+            expect(attr.value).to eq('test3')
+          end
+        end
+
+        context 'invalid' do
+          before { post_body :update, 'invalid', id: @id }
+
+          it { expect(response.status).to eq(400) }
+          it { expect(rr.typed_links.size).to eq(2) }
+
+          it do
+            link = rr.typed_links.where(path: '/test1').first
+            attr = link.target_attributes.where(type: 'if').first
+
+            expect(attr.value).to eq('test')
+          end
+        end
+      end
     end
   end
 
