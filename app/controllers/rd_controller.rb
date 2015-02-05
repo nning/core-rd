@@ -6,10 +6,10 @@ class RdController < ApplicationController
     begin
       links = CoRE::Link.parse_multiple(request.body.read)
     rescue ArgumentError
-      head :bad_request and return
+      head 4.00 and return
     end
 
-    head :bad_request and return if links.empty?
+    head 4.00 and return if links.empty?
 
     if params[:con].nil?
       params[:con] = ResourceRegistration.default_con(request)
@@ -29,14 +29,14 @@ class RdController < ApplicationController
     # TODO Use path helper
     response.headers['Location'] = "/rd/#{r.id}"
 
-    head :created
+    head 2.01
   end
 
   def destroy
     rr = ResourceRegistration.find(params[:id])
     rr.destroy!
 
-    head :accepted
+    head 2.02
   end
 
   def update
@@ -64,10 +64,10 @@ class RdController < ApplicationController
         r.save!
       end
     rescue
-      head :bad_request and return
+      head 4.00 and return
     end
 
-    head 204
+    head 2.04
   end
 
   private

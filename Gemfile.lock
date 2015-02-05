@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/nning/david.git
+  revision: 5f4011eaab5a4123521b41a572dfeb3f2c1734b6
+  specs:
+    david (0.4.0.pre)
+      celluloid-io (~> 0.16, >= 0.16.1)
+      coap (~> 0.1)
+      rack (~> 1.5)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -43,7 +52,7 @@ GEM
     celluloid-io (0.16.2)
       celluloid (>= 0.16.0)
       nio4r (>= 1.1.0)
-    coap (0.1.0)
+    coap (0.1.1)
       celluloid-io (~> 0.16, >= 0.16.1)
       resolv-ipv6favor (~> 0)
     coffee-rails (4.0.1)
@@ -53,13 +62,9 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.0)
-    david (0.3.0)
-      celluloid-io (~> 0.16, >= 0.16.1)
-      coap (~> 0.1)
-      rack (~> 1.5)
     diff-lcs (1.2.5)
     erubis (2.7.0)
-    execjs (2.2.2)
+    execjs (2.3.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.5.0)
@@ -121,22 +126,23 @@ GEM
     rdoc (4.2.0)
     ref (1.0.5)
     resolv-ipv6favor (0.0.0)
-    rspec-core (3.1.7)
-      rspec-support (~> 3.1.0)
-    rspec-expectations (3.1.2)
+    rspec-core (3.2.0)
+      rspec-support (~> 3.2.0)
+    rspec-expectations (3.2.0)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.1.0)
-    rspec-mocks (3.1.3)
-      rspec-support (~> 3.1.0)
-    rspec-rails (3.1.0)
-      actionpack (>= 3.0)
-      activesupport (>= 3.0)
-      railties (>= 3.0)
-      rspec-core (~> 3.1.0)
-      rspec-expectations (~> 3.1.0)
-      rspec-mocks (~> 3.1.0)
-      rspec-support (~> 3.1.0)
-    rspec-support (3.1.2)
+      rspec-support (~> 3.2.0)
+    rspec-mocks (3.2.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.2.0)
+    rspec-rails (3.2.0)
+      actionpack (>= 3.0, <= 4.2)
+      activesupport (>= 3.0, <= 4.2)
+      railties (>= 3.0, <= 4.2)
+      rspec-core (~> 3.2.0)
+      rspec-expectations (~> 3.2.0)
+      rspec-mocks (~> 3.2.0)
+      rspec-support (~> 3.2.0)
+    rspec-support (3.2.1)
     sass (3.2.19)
     sass-rails (4.0.5)
       railties (>= 4.0.0, < 5.0)
@@ -179,7 +185,7 @@ PLATFORMS
 DEPENDENCIES
   coap (~> 0.1.0)
   coffee-rails (~> 4.0.0)
-  david (~> 0.3.0)
+  david!
   factory_girl_rails (~> 4.0)
   jbuilder (~> 2.0)
   jquery-rails

@@ -22,19 +22,19 @@ describe RdController do
       context 'error' do
         it 'empty' do
           post_body :create, '', ep: 'foo'
-          expect(response.status).to eq(400)
+          expect(response.status).to eq(4.00)
         end
 
         it 'invalid' do
           post_body :create, 'foo', ep: 'foo'
-          expect(response.status).to eq(400)
+          expect(response.status).to eq(4.00)
         end
       end
 
       context 'no error' do
         before { post_body :create, '</test1>;if="test",</test2>', ep: 'foo' }
 
-        it { expect(response.status).to eq(201) }
+        it { expect(response.status).to eq(2.01) }
         it { expect(response.headers['Location']).to eq('/rd/1') }
 
         it { expect(ResourceRegistration.count).to eq(1) }
@@ -56,7 +56,7 @@ describe RdController do
       context 'empty' do
         before { post :update, id: @id }
 
-        it { expect(response.status).to eq(204) }
+        it { expect(response.status).to eq(2.04) }
       end
 
       context 'lt' do
@@ -64,7 +64,7 @@ describe RdController do
 
         before { post :update, id: @id, lt: lt }
 
-        it { expect(response.status).to eq(204) }
+        it { expect(response.status).to eq(2.04) }
         it { expect(rr.lt).to eq(lt) }
       end
 
@@ -74,7 +74,7 @@ describe RdController do
 
         before { post :update, id: @id, con: con }
 
-        it { expect(response.status).to eq(204) }
+        it { expect(response.status).to eq(2.04) }
         it { expect(rr.con).to eq(con) }
       end
 
@@ -82,7 +82,7 @@ describe RdController do
         context 'valid change' do
           before { post_body :update, '</test1>;if="test1"', id: @id }
 
-          it { expect(response.status).to eq(204) }
+          it { expect(response.status).to eq(2.04) }
           it { expect(rr.typed_links.size).to eq(2) }
 
           it do
@@ -96,7 +96,7 @@ describe RdController do
         context 'valid create' do
           before { post_body :update, '</test3>;if="test3"', id: @id }
 
-          it { expect(response.status).to eq(204) }
+          it { expect(response.status).to eq(2.04) }
           it { expect(rr.typed_links.size).to eq(3) }
 
           it do
@@ -110,7 +110,7 @@ describe RdController do
         context 'invalid' do
           before { post_body :update, 'invalid', id: @id }
 
-          it { expect(response.status).to eq(400) }
+          it { expect(response.status).to eq(4.00) }
           it { expect(rr.typed_links.size).to eq(2) }
 
           it do
@@ -127,12 +127,12 @@ describe RdController do
   describe 'DELETE #destroy (removal)' do
     it 'deleted' do
       post_body :create, '</test>', ep: 'foo'
-      expect(response.status).to eq(201)
+      expect(response.status).to eq(2.01)
 
       r = ResourceRegistration.first
 
       delete :destroy, id: r.id
-      expect(response.status).to eq(202)
+      expect(response.status).to eq(2.02)
     end
 
     it 'not found' do
