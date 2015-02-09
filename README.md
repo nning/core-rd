@@ -7,6 +7,11 @@
 
 Rails application implementing a [CoRE Resource Directory](https://tools.ietf.org/html/draft-ietf-core-resource-directory-02).
 
+## TODO
+
+* `GET /` without `accept: 'application/json'` tries to find template in
+  CoRE::Link format and fails with 5.00.
+
 ## Copyright
 
 The code is published under the AGPLv3 license (see the LICENSE file).
