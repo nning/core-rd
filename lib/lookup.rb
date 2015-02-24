@@ -4,6 +4,6 @@ class Lookup
       TypedLink.filter(params)
     end
 
-    %i[d ep gp].each { |m| define_method(m) { |p| [] } }
+#   %i[d ep gp].each { |m| define_method(m) { |p| [] } }
   end
 end

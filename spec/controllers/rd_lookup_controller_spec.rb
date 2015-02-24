@@ -57,16 +57,13 @@ describe RdLookupController do
       end
     end
 
-=begin
-    context 'type ep' do
-      context 'results' do
-        it 'et' do
-          get :lookup, type: 'ep', et: 'power-node'
-          expect(response.status).to eq(2.05)
-          expect(response.body).to eq(nil)
-        end
-      end
-    end
-=end
+    # context 'type ep' do
+    #   context 'results' do
+    #     it 'et' do
+    #       get :lookup, type: 'ep', et: 'power-node'
+    #       expect(response.status).to eq(2.05)
+    #     end
+    #   end
+    # end
   end
 end
