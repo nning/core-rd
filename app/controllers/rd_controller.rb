@@ -18,7 +18,7 @@ class RdController < ApplicationController
     r = ResourceRegistration.new(create_params)
 
     links.each do |link|
-      l = r.typed_links.build(path: link.uri)
+      l = r.typed_links.build(uri: link.uri)
       link.attrs.each do |type, value|
         l.target_attributes.build(type: type, value: value)
       end
@@ -50,10 +50,10 @@ class RdController < ApplicationController
 
         links.each do |link|
           # This does not work, strangely:
-          # l = r.typed_links.first_or_initialize(path: link.uri)
+          # l = r.typed_links.first_or_initialize(uri: link.uri)
 
-          l   = r.typed_links.where(path: link.uri).first
-          l ||= r.typed_links.build(path: link.uri)
+          l   = r.typed_links.where(uri: link.uri).first
+          l ||= r.typed_links.build(uri: link.uri)
 
           link.attrs.each do |type, value|
             a = l.target_attributes.first_or_initialize(type: type)

@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20141219095442) do
   add_index "target_attributes", ["typed_link_id"], name: "index_target_attributes_on_typed_link_id"
 
   create_table "typed_links", force: :cascade do |t|
-    t.string   "path",                     null: false
+    t.string   "uri",                      null: false
     t.integer  "resource_registration_id"
     t.datetime "created_at"
     t.datetime "updated_at"

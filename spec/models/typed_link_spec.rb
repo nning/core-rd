@@ -22,16 +22,16 @@ describe TypedLink, type: :model do
       let(:links) { TypedLink.all }
 
       it { expect(parsed.size).to eq(n) }
-      it { expect(parsed.map(&:uri)).to eq(links.pluck(:path)) }
+      it { expect(parsed.map(&:uri)).to eq(links.pluck(:uri)) }
     end
 
     context 'where' do
-      before { 3.times { create(:typed_link, path: '/foo') } }
+      before { 3.times { create(:typed_link, uri: '/foo') } }
 
-      let(:links) { TypedLink.where(path: '/foo') }
+      let(:links) { TypedLink.where(uri: '/foo') }
 
       it { expect(parsed.size).to eq(3) }
-      it { expect(parsed.map(&:uri)).to eq(links.pluck(:path)) }
+      it { expect(parsed.map(&:uri)).to eq(links.pluck(:uri)) }
     end
   end
 

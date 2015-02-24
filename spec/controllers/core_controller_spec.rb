@@ -61,7 +61,7 @@ describe CoreController do
         end
 
         it 'body' do
-          expect(response.body).to match(/\<\/test[0-9]+>;rt="a"/)
+          expect(response.body).to match(/\/test[0-9]+>;rt="a"$/)
         end
 
         it 'parsed' do
@@ -92,7 +92,7 @@ describe CoreController do
         end
 
         it 'body' do
-          expect(response.body).to match(/\<\/test[0-9]+>;if="c";rt="b"/)
+          expect(response.body).to match(/\/test[0-9]+>;if="c";rt="b"$/)
         end
 
         it 'parsed' do

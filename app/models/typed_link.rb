@@ -4,7 +4,7 @@ class TypedLink < ActiveRecord::Base
 
   # Instance to CoRE::Link
   def to_link
-    CoRE::Link.new(path, target_attributes.all.to_h).to_s
+    CoRE::Link.new(uri, target_attributes.all.to_h).to_s
   end
 
   # Relation to CoRE::Link

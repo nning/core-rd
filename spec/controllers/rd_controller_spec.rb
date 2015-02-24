@@ -86,7 +86,7 @@ describe RdController do
           it { expect(rr.typed_links.size).to eq(2) }
 
           it do
-            link = rr.typed_links.where(path: '/test1').first
+            link = rr.typed_links.where(uri: '/test1').first
             attr = link.target_attributes.where(type: 'if').first
 
             expect(attr.value).to eq('test1')
@@ -100,7 +100,7 @@ describe RdController do
           it { expect(rr.typed_links.size).to eq(3) }
 
           it do
-            link = rr.typed_links.where(path: '/test3').first
+            link = rr.typed_links.where(uri: '/test3').first
             attr = link.target_attributes.where(type: 'if').first
 
             expect(attr.value).to eq('test3')
@@ -114,7 +114,7 @@ describe RdController do
           it { expect(rr.typed_links.size).to eq(2) }
 
           it do
-            link = rr.typed_links.where(path: '/test1').first
+            link = rr.typed_links.where(uri: '/test1').first
             attr = link.target_attributes.where(type: 'if').first
 
             expect(attr.value).to eq('test')
