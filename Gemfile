@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.2.0'
+gem 'rails', '~> 4.2.3'
 
-gem 'david', '~> 0.4.0'
+gem 'david', '~> 0.4.5'
 gem 'coap', '~> 0.1.0'
 
 gem 'jbuilder', '~> 2.0'
