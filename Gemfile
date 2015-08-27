@@ -1,12 +1,14 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.2.3'
+gem 'rails', '~> 4.2.4'
 
 gem 'david', '~> 0.4.5'
 gem 'coap', '~> 0.1.0'
 
 gem 'jbuilder', '~> 2.0'
 gem 'sqlite3'
+
+gem 'rack', '~> 1.6.4'
 
 group :development do
   gem 'spring'
