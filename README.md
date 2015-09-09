@@ -14,7 +14,7 @@ Rails application implementing a [CoRE Resource Directory](https://tools.ietf.or
 
 ## Copyright
 
-The code is published under the AGPLv3 license (see the LICENSE file).
+The code is published under the MIT license (see the LICENSE file).
 
 ### Authors
 
