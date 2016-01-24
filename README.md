@@ -7,6 +7,10 @@
 
 Rails application implementing a [CoRE Resource Directory](https://tools.ietf.org/html/draft-ietf-core-resource-directory-02).
 
+## Startup
+
+    rackup
+
 ## TODO
 
 * `GET /` without `accept: 'application/json'` tries to find template in

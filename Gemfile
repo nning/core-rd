@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 4.2.4'
 
-gem 'david', '~> 0.4.5'
+gem 'david', github: 'nning/david'
 gem 'coap', '~> 0.1.0'
 
 gem 'jbuilder', '~> 2.0'
