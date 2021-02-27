@@ -11,6 +11,14 @@ Rails application implementing a [CoRE Resource Directory](https://tools.ietf.or
 
     rackup
 
+## Quick start in Docker
+
+    docker build . -t core-rd
+    docker run -it core-rd
+
+(IPv6 and multicast will probably not supported properly out-of-the-box but this
+is a quick way to start the server without manual setup.)
+
 ## TODO
 
 * `GET /` without `accept: 'application/json'` tries to find template in
